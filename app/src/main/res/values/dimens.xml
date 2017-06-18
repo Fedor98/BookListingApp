@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_textSize">16sp</dimen>
+    <dimen name="author_pages_textSize">12sp</dimen>
+    <dimen name="answer_textSize">20sp</dimen>
+    <dimen name="edit_text_button_width">0dp</dimen>
+</resources>
