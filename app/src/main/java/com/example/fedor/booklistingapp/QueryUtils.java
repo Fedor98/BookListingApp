@@ -158,7 +158,7 @@ public final class QueryUtils {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding bookListings to
+        // Create an empty ArrayList that we can start adding books to
         List<BookListing> bookListings = new ArrayList<>();
 
         // Try to parse the JSON response string. If there's a problem with the way the JSON
@@ -184,7 +184,7 @@ public final class QueryUtils {
                 JSONObject currentBookListing = bookListingsArray.getJSONObject(i);
 
                 // For a given bookListing, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
+                // key called "volumeInfo", which represents a list of all properties
                 // for that bookListing.
                 JSONObject volumeInfo = currentBookListing.getJSONObject("volumeInfo");
 
@@ -206,14 +206,14 @@ public final class QueryUtils {
                     JSONArray authors = volumeInfo.getJSONArray("authors");
                     author = authors.getString(0);
                 } else {
-                    author = "";
+                    author = "N/A";
                 }
 
-                // Create a new {@link BookListing} object with the magnitude, location, time,
+                // Create a new {@link BookListing} object with the title, page count, authors,
                 // and url from the JSON response.
                 BookListing bookListing = new BookListing(title, author, pageCount, url);
 
-                // Add the new {@link BookListing} to the list of bookListings.
+                // Add the new {@link BookListing} to the list of books.
                 bookListings.add(bookListing);
             }
 
@@ -224,7 +224,7 @@ public final class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
 
-        // Return the list of bookListings
+        // Return the list of books
         return bookListings;
     }
 

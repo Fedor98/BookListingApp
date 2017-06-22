@@ -26,7 +26,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * An {@link BookListingAdapter} knows how to create a list item layout for each earthquake
+ * An {@link BookListingAdapter} knows how to create a list item layout for each book
  * in the data source (a list of {@link BookListing} objects).
  * <p>
  * These list item layouts will be provided to an adapter view like ListView
@@ -45,40 +45,39 @@ public class BookListingAdapter extends ArrayAdapter<BookListing> {
     }
 
     /**
-     * Returns a list item view that displays information about the earthquake at the given position
-     * in the list of earthquakes.
+     * Returns a list item view that displays information about the book at the given position
+     * in the list of books.
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is null, then inflate a new list item layout.
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.booklisting_list_item, parent, false);
         }
 
-        // Find the earthquake at the given position in the list of earthquakes
+        // Find the earthquake at the given position in the list of books
         BookListing currentBookListing = getItem(position);
 
         // Find the TextView with view ID title
-        TextView titleView = (TextView) listItemView.findViewById(R.id.book_title);
+        TextView titleView = (TextView) convertView.findViewById(R.id.book_title);
         // Display the title of the current book in that TextView
         titleView.setText(currentBookListing.getTitle());
 
         // Find the TextView with view ID authors
-        TextView authorsView = (TextView) listItemView.findViewById(R.id.book_authors);
+        TextView authorsView = (TextView) convertView.findViewById(R.id.book_authors);
         // Display the authors of the current book in that TextView
         authorsView.setText("Auhor: " + currentBookListing.getAuthor());
 
         // Find the TextView with view ID page count
-        TextView pageCountView = (TextView) listItemView.findViewById(R.id.page_count);
+        TextView pageCountView = (TextView) convertView.findViewById(R.id.page_count);
         // Format the int to a string (i.e. "499")
         String pageCount = Integer.toString(currentBookListing.getPageCount());
         // Display the page count of the current book in that TextView
         pageCountView.setText("Pages: " + pageCount);
 
         // Return the list item view that is now showing the appropriate data
-        return listItemView;
+        return convertView;
     }
 }
